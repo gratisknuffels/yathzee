@@ -283,9 +283,7 @@
     <div class="hof-title">Hall of Fame</div>
     <div class="hof-subtitle">ALL-TIME STATS · STORED PERMANENTLY IN THE CLOUD</div>
     <div id="hof-content"><div class="hof-loading">LOADING...</div></div>
-    <div class="hof-actions">
-      <button class="btn danger" onclick="confirmClearHof()">Clear All Records</button>
-    </div>
+
   </div>
 </div>
 
@@ -575,7 +573,14 @@ function buildInput(playerName, key) {
   const inp = document.createElement('input');
   inp.type = 'number'; inp.min = 0; inp.max = 30; inp.placeholder = '—';
   inp.id = `score-${sanitize(playerName)}-${key}`;
-  inp.addEventListener('change', () => saveScore(playerName, key, inp));
+  inp.addEventListener('change', () => {
+    const val = parseInt(inp.value);
+    if (!isNaN(val)) {
+      if (val > 30) inp.value = 30;
+      else if (val > 0 && val < 5) inp.value = 5;
+    }
+    saveScore(playerName, key, inp);
+  });
   return inp;
 }
 
