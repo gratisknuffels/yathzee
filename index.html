@@ -31,374 +31,209 @@
     padding-bottom: 80px;
   }
 
-  /* HEADER */
-  header {
-    background: var(--surface);
-    border-bottom: 2px solid var(--accent);
-    padding: 14px 16px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 2px;
-    color: var(--accent);
-    line-height: 1;
-    flex-shrink: 0;
-  }
-
-  .logo span { color: var(--accent2); }
-
-  .header-btns {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
   .btn {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 6px 12px;
-    border-radius: 4px;
+    font-size: 0.7rem; font-weight: 500;
+    padding: 6px 12px; border-radius: 4px;
     border: 1.5px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    transition: all 0.15s;
-    white-space: nowrap;
+    background: transparent; color: var(--text);
+    cursor: pointer; letter-spacing: 0.5px;
+    transition: all 0.15s; white-space: nowrap;
   }
-
   .btn:hover { border-color: var(--accent); color: var(--accent); }
   .btn.primary { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 500; }
   .btn.primary:hover { background: #e0b530; }
   .btn.danger { border-color: var(--red); color: var(--red); }
   .btn.danger:hover { background: var(--red); color: #fff; }
 
-  /* PLAYER SETUP */
-  #setup-screen {
-    padding: 24px 16px;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
+  /* ── SETUP ── */
+  #setup-screen { padding: 24px 16px; max-width: 500px; margin: 0 auto; }
   #setup-screen h2 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-    color: var(--accent);
-    margin-bottom: 20px;
+    font-size: 1.5rem; letter-spacing: 1px;
+    color: var(--accent); margin-bottom: 20px;
   }
-
-  .player-input-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
-    align-items: center;
+  .dice-row { display: flex; justify-content: center; gap: 6px; padding: 14px 0 8px; }
+  .die {
+    width: 28px; height: 28px; background: var(--surface2);
+    border: 1.5px solid var(--border); border-radius: 5px;
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
   }
-
-  .player-color-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
+  .player-input-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
+  .player-color-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
   input[type="text"] {
-    flex: 1;
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 4px;
-    color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.85rem;
-    padding: 10px 12px;
-    outline: none;
-    transition: border-color 0.15s;
+    flex: 1; background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 4px; color: var(--text); font-family: 'DM Mono', monospace;
+    font-size: 0.85rem; padding: 10px 12px; outline: none; transition: border-color 0.15s;
   }
-
   input[type="text"]:focus { border-color: var(--accent); }
   input[type="text"]::placeholder { color: var(--muted); }
-
   .remove-player-btn {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 1.1rem;
-    cursor: pointer;
-    padding: 4px 8px;
-    transition: color 0.15s;
-    flex-shrink: 0;
+    background: none; border: none; color: var(--muted);
+    font-size: 1.1rem; cursor: pointer; padding: 4px 8px;
+    transition: color 0.15s; flex-shrink: 0;
   }
-
   .remove-player-btn:hover { color: var(--red); }
+  .setup-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 
-  .setup-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-
-  /* GAME SCREEN */
+  /* ── GAME SCREEN ── */
   #game-screen { display: none; }
-
-  /* SCROLL WRAPPER */
-  .table-scroll {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  header {
+    background: var(--surface); border-bottom: 2px solid var(--accent);
+    padding: 14px 16px 10px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
   }
-
-  /* SCOREBOARD TABLE */
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    min-width: 320px;
-  }
-
-  thead th {
-    background: var(--surface);
-    padding: 10px 8px;
+  .logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    text-align: center;
-    border-bottom: 2px solid var(--border);
-    white-space: nowrap;
+    font-size: 2rem; letter-spacing: 2px; color: var(--accent); line-height: 1; flex-shrink: 0;
   }
+  .logo span { color: var(--accent2); }
+  .header-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 
-  thead th:first-child {
-    text-align: left;
-    padding-left: 12px;
-    min-width: 130px;
-    background: var(--surface);
+  .nav-tabs { display: flex; background: var(--surface); border-bottom: 2px solid var(--border); }
+  .nav-tab {
+    flex: 1; font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.95rem; letter-spacing: 1.5px; padding: 10px 8px;
+    text-align: center; color: var(--muted); cursor: pointer;
+    border: none; background: none;
+    border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.15s;
   }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-  .player-header {
-    min-width: 80px;
-  }
-
-  .player-name-display {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    display: block;
-  }
-
-  .player-total-display {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    display: block;
-    margin-top: 2px;
-  }
-
-  /* SECTION HEADERS */
-  .section-row td {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    color: var(--muted);
-    padding: 8px 12px 4px;
-    border-top: 1px solid var(--border);
-    background: var(--bg);
-  }
-
-  /* SCORE ROW */
-  .score-row td {
-    border-bottom: 1px solid var(--border);
-    padding: 0;
-  }
-
-  .score-row.upper { background: var(--upper); }
-  .score-row.lower { background: var(--lower); }
-
-  .row-label {
-    padding: 10px 12px;
-    font-size: 0.8rem;
-    color: var(--text);
-    white-space: nowrap;
-  }
-
-  .row-label .row-desc {
-    font-size: 0.65rem;
-    color: var(--muted);
-    display: block;
-    margin-top: 1px;
-  }
-
-  /* SCORE CELL */
-  .score-cell {
-    text-align: center;
-    padding: 4px;
-    position: relative;
-  }
-
-  .score-cell select,
-  .score-cell input[type="number"] {
-    width: 100%;
-    max-width: 70px;
-    background: transparent;
-    border: 1.5px solid transparent;
-    border-radius: 4px;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-align: center;
-    padding: 6px 2px;
-    outline: none;
-    transition: all 0.15s;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-  }
-
-  .score-cell input[type="number"]::-webkit-outer-spin-button,
-  .score-cell input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-
-  .score-cell select:focus,
-  .score-cell input[type="number"]:focus {
-    border-color: var(--accent);
-    background: var(--surface2);
-  }
-
-  .score-cell select.filled,
-  .score-cell input[type="number"].filled {
-    color: var(--accent);
-  }
-
-  .score-cell select.zeroed,
-  .score-cell input[type="number"].zeroed {
-    color: var(--muted);
-  }
-
-  .score-cell select option {
-    background: var(--surface2);
-    color: var(--text);
-  }
-
-  /* SUBTOTAL / BONUS / TOTAL ROWS */
-  .subtotal-row td, .total-row td {
-    padding: 8px 12px;
-    font-size: 0.8rem;
-    border-top: 2px solid var(--border);
-  }
-
-  .subtotal-row { background: var(--surface2); }
-  .total-row { background: var(--surface); border-bottom: 3px solid var(--accent2); }
-
-  .subtotal-row .val, .total-row .val {
-    text-align: center;
-    font-weight: 500;
-  }
-
-  .total-row .val {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    color: var(--accent);
-  }
-
-  .bonus-indicator {
-    font-size: 0.65rem;
-    display: block;
-  }
-
-  .bonus-achieved { color: var(--green); }
-  .bonus-pending { color: var(--muted); }
-
-  /* WINNER BANNER */
   #winner-banner {
     display: none;
     background: linear-gradient(135deg, #f5c842 0%, #e8743a 100%);
-    color: #000;
-    text-align: center;
-    padding: 16px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 2px;
+    color: #000; text-align: center; padding: 16px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px;
   }
 
-  /* DICE DECORATION */
-  .dice-row {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    padding: 14px 0 8px;
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; min-width: 320px; }
+  thead th {
+    background: var(--surface); padding: 10px 8px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1px;
+    text-align: center; border-bottom: 2px solid var(--border); white-space: nowrap;
+  }
+  thead th:first-child { text-align: left; padding-left: 12px; min-width: 130px; }
+  .player-header { min-width: 80px; }
+  .player-name-display { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1px; display: block; }
+  .player-total-display { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); display: block; margin-top: 2px; }
+  .color-bar { height: 3px; width: 100%; border-radius: 2px; margin-top: 4px; }
+
+  .section-row td {
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; letter-spacing: 2px;
+    color: var(--muted); padding: 8px 12px 4px; border-top: 1px solid var(--border); background: var(--bg);
+  }
+  .score-row td { border-bottom: 1px solid var(--border); padding: 0; }
+  .score-row.upper { background: var(--upper); }
+  .score-row.lower { background: var(--lower); }
+  .row-label { padding: 10px 12px; font-size: 0.8rem; color: var(--text); white-space: nowrap; }
+  .row-label .row-desc { font-size: 0.65rem; color: var(--muted); display: block; margin-top: 1px; }
+
+  .score-cell { text-align: center; padding: 4px; }
+  .score-cell select,
+  .score-cell input[type="number"] {
+    width: 100%; max-width: 70px; background: transparent;
+    border: 1.5px solid transparent; border-radius: 4px; color: var(--muted);
+    font-family: 'DM Mono', monospace; font-size: 0.9rem; font-weight: 500;
+    text-align: center; padding: 6px 2px; outline: none; transition: all 0.15s;
+    cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: textfield;
+  }
+  .score-cell input[type="number"]::-webkit-outer-spin-button,
+  .score-cell input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .score-cell select:focus,
+  .score-cell input[type="number"]:focus { border-color: var(--accent); background: var(--surface2); }
+  .score-cell select.filled,
+  .score-cell input[type="number"].filled { color: var(--accent); }
+  .score-cell select.zeroed,
+  .score-cell input[type="number"].zeroed { color: var(--muted); }
+  .score-cell select option { background: var(--surface2); color: var(--text); }
+
+  .subtotal-row td, .total-row td { padding: 8px 12px; font-size: 0.8rem; border-top: 2px solid var(--border); }
+  .subtotal-row { background: var(--surface2); }
+  .total-row { background: var(--surface); border-bottom: 3px solid var(--accent2); }
+  .subtotal-row .val, .total-row .val { text-align: center; font-weight: 500; }
+  .total-row .val { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--accent); }
+  .bonus-achieved { color: var(--green); }
+  .bonus-pending { color: var(--muted); }
+  .footer-note { text-align: center; color: var(--muted); font-size: 0.65rem; padding: 16px; letter-spacing: 0.5px; }
+
+  /* ── HALL OF FAME ── */
+  #hof-screen { display: none; padding: 20px 16px; max-width: 600px; margin: 0 auto; }
+  .hof-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 3px; color: var(--accent); margin-bottom: 4px; }
+  .hof-subtitle { font-size: 0.7rem; color: var(--muted); letter-spacing: 1px; margin-bottom: 20px; }
+
+  .hof-empty {
+    text-align: center; color: var(--muted); font-size: 0.8rem;
+    padding: 40px 20px; border: 1.5px dashed var(--border); border-radius: 8px;
   }
 
-  .die {
-    width: 28px;
-    height: 28px;
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
+  .hof-loading {
+    text-align: center; color: var(--muted); font-size: 0.8rem; padding: 40px 20px;
+    letter-spacing: 1px;
   }
 
-  /* FOOTER NOTE */
-  .footer-note {
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.65rem;
-    padding: 16px;
-    letter-spacing: 0.5px;
+  .hof-error {
+    text-align: center; color: var(--red); font-size: 0.75rem;
+    padding: 20px; border: 1.5px solid var(--red); border-radius: 8px; margin-bottom: 12px;
   }
 
-  /* PLAYER COLOR INDICATORS */
-  .color-bar {
-    height: 3px;
-    width: 100%;
-    border-radius: 2px;
-    margin-top: 4px;
+  .hof-player-card {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 8px; margin-bottom: 12px; overflow: hidden;
   }
+  .hof-card-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px 10px; border-bottom: 1px solid var(--border);
+  }
+  .hof-rank { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--muted); width: 28px; flex-shrink: 0; }
+  .hof-rank.gold   { color: #f5c842; }
+  .hof-rank.silver { color: #b0aaa0; }
+  .hof-rank.bronze { color: #cd7f32; }
+  .hof-color-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .hof-player-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 1px; flex: 1; }
 
-  /* MODAL */
+  .hof-stats { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+  .hof-stat { padding: 10px 4px; border-right: 1px solid var(--border); }
+  .hof-stat:last-child { border-right: none; }
+  .hof-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--text); display: block; }
+  .hof-stat-val.accent { color: var(--accent); }
+  .hof-stat-label { font-size: 0.58rem; color: var(--muted); letter-spacing: 0.5px; display: block; margin-top: 2px; }
+
+  .hof-history-toggle {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted);
+    padding: 7px 14px; cursor: pointer; background: none;
+    border: none; border-top: 1px solid var(--border);
+    width: 100%; text-align: left; transition: color 0.15s; letter-spacing: 0.5px;
+  }
+  .hof-history-toggle:hover { color: var(--accent); }
+  .hof-history { display: none; padding: 4px 14px 10px; }
+  .hof-history.open { display: block; }
+  .hof-game-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 0.72rem; gap: 8px;
+  }
+  .hof-game-row:last-child { border-bottom: none; }
+  .hof-game-date { color: var(--muted); flex-shrink: 0; }
+  .hof-game-score { color: var(--accent); font-weight: 500; }
+  .hof-game-won  { color: var(--green); font-size: 0.65rem; flex-shrink: 0; }
+  .hof-game-lost { color: var(--muted); font-size: 0.65rem; flex-shrink: 0; }
+  .hof-actions { display: flex; justify-content: flex-end; margin-top: 20px; }
+
+  /* ── MODAL ── */
   .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 200;
+    align-items: center; justify-content: center; padding: 20px;
   }
-
   .modal-overlay.active { display: flex; }
-
   .modal {
-    background: var(--surface);
-    border: 2px solid var(--accent);
-    border-radius: 8px;
-    padding: 24px;
-    max-width: 380px;
-    width: 100%;
-    text-align: center;
+    background: var(--surface); border: 2px solid var(--accent);
+    border-radius: 8px; padding: 24px; max-width: 380px; width: 100%; text-align: center;
   }
-
-  .modal h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 2px;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-
+  .modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: var(--accent); margin-bottom: 8px; }
   .modal p { color: var(--muted); font-size: 0.8rem; margin-bottom: 20px; }
-
   .modal-btns { display: flex; gap: 10px; justify-content: center; }
-
 </style>
 </head>
 <body>
@@ -406,11 +241,8 @@
 <!-- SETUP SCREEN -->
 <div id="setup-screen">
   <div class="dice-row">
-    <div class="die">⚀</div>
-    <div class="die">⚁</div>
-    <div class="die">⚂</div>
-    <div class="die">⚃</div>
-    <div class="die">⚄</div>
+    <div class="die">⚀</div><div class="die">⚁</div><div class="die">⚂</div>
+    <div class="die">⚃</div><div class="die">⚄</div>
   </div>
   <h2>NEW GAME — ADD PLAYERS</h2>
   <div id="player-inputs"></div>
@@ -429,73 +261,132 @@
     </div>
   </header>
 
-  <div id="winner-banner"></div>
-
-  <div class="table-scroll">
-    <table id="score-table">
-      <thead>
-        <tr id="player-header-row">
-          <th>Category</th>
-        </tr>
-      </thead>
-      <tbody id="score-body"></tbody>
-    </table>
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tab-score" onclick="showTab('score')">🎲 Scoreboard</button>
+    <button class="nav-tab"        id="tab-hof"   onclick="showTab('hof')">🏆 Hall of Fame</button>
   </div>
 
-  <p class="footer-note">TAP A CELL TO ENTER A SCORE · UPPER BONUS: 63+ = +35</p>
+  <!-- SCOREBOARD TAB -->
+  <div id="score-tab">
+    <div id="winner-banner"></div>
+    <div class="table-scroll">
+      <table id="score-table">
+        <thead><tr id="player-header-row"><th>Category</th></tr></thead>
+        <tbody id="score-body"></tbody>
+      </table>
+    </div>
+    <p class="footer-note">TAP A CELL TO ENTER A SCORE · UPPER BONUS: 63+ = +35</p>
+  </div>
+
+  <!-- HALL OF FAME TAB -->
+  <div id="hof-screen">
+    <div class="hof-title">Hall of Fame</div>
+    <div class="hof-subtitle">ALL-TIME STATS · STORED PERMANENTLY IN THE CLOUD</div>
+    <div id="hof-content"><div class="hof-loading">LOADING...</div></div>
+    <div class="hof-actions">
+      <button class="btn danger" onclick="confirmClearHof()">Clear All Records</button>
+    </div>
+  </div>
 </div>
 
-<!-- CONFIRM MODAL -->
+<!-- RESET GAME MODAL -->
 <div class="modal-overlay" id="confirm-modal">
   <div class="modal">
-    <h3>Reset Game?</h3>
-    <p>All scores will be cleared and you'll return to player setup.</p>
+    <h3>New Game?</h3>
+    <p>Current scores will be cleared and you'll return to player setup.</p>
     <div class="modal-btns">
-      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="closeModal('confirm-modal')">Cancel</button>
       <button class="btn danger" onclick="resetGame()">Reset</button>
     </div>
   </div>
 </div>
 
+<!-- CLEAR HOF MODAL -->
+<div class="modal-overlay" id="clear-hof-modal">
+  <div class="modal">
+    <h3>Clear History?</h3>
+    <p>All Hall of Fame records will be permanently deleted from the database.</p>
+    <div class="modal-btns">
+      <button class="btn" onclick="closeModal('clear-hof-modal')">Cancel</button>
+      <button class="btn danger" onclick="clearHof()">Clear All</button>
+    </div>
+  </div>
+</div>
+
 <script>
+/* ════════════════════════════════════════════
+   SUPABASE CONFIG
+════════════════════════════════════════════ */
+const SUPABASE_URL = 'https://bgosxvcsafosgcieickr.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJnb3N4dmNzYWZvc2djaWVpY2tyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwMjU3NzgsImV4cCI6MjA4OTYwMTc3OH0._v_qGt9MEZ4bg2TfECzQ8NYcMVxE9gyXFc2Qrb5MLR4';
+
+async function sb(path, options = {}) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': options.prefer || 'return=representation',
+      ...options.headers
+    },
+    method: options.method || 'GET',
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err);
+  }
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
+
+/* ════════════════════════════════════════════
+   DATA
+════════════════════════════════════════════ */
 const PLAYER_COLORS = ['#f5c842','#e8743a','#4caf6e','#4a9ede','#c86dd7','#e84040'];
 
-// Generate array [0, step, step*2, ... max]
 function range(step, count) {
   return [null, ...Array.from({length: count}, (_, i) => step * (i + 1))];
 }
 
-// Dice sum options: any multiple of 1 from min to 30
-function diceRange(min, max) {
-  const opts = [null];
-  for (let i = min; i <= max; i++) opts.push(i);
-  return opts;
-}
-
 const UPPER_CATS = [
-  { key:'ones',   label:'Ones',   desc:'Sum of all 1s', options: range(1, 5) },
-  { key:'twos',   label:'Twos',   desc:'Sum of all 2s', options: range(2, 5) },
-  { key:'threes', label:'Threes', desc:'Sum of all 3s', options: range(3, 5) },
-  { key:'fours',  label:'Fours',  desc:'Sum of all 4s', options: range(4, 5) },
-  { key:'fives',  label:'Fives',  desc:'Sum of all 5s', options: range(5, 5) },
-  { key:'sixes',  label:'Sixes',  desc:'Sum of all 6s', options: range(6, 5) },
+  { key:'ones',   label:'Ones',   desc:'Sum of all 1s', options: range(1,5) },
+  { key:'twos',   label:'Twos',   desc:'Sum of all 2s', options: range(2,5) },
+  { key:'threes', label:'Threes', desc:'Sum of all 3s', options: range(3,5) },
+  { key:'fours',  label:'Fours',  desc:'Sum of all 4s', options: range(4,5) },
+  { key:'fives',  label:'Fives',  desc:'Sum of all 5s', options: range(5,5) },
+  { key:'sixes',  label:'Sixes',  desc:'Sum of all 6s', options: range(6,5) },
 ];
 
 const LOWER_CATS = [
-  { key:'three_kind',    label:'3 of a Kind',    desc:'Sum of all dice',   manual: true },
-  { key:'four_kind',     label:'4 of a Kind',    desc:'Sum of all dice',   manual: true },
-  { key:'full_house',    label:'Full House',     desc:'25 pts',            options: [null, 0, 25] },
-  { key:'sm_straight',   label:'Sm. Straight',   desc:'30 pts',            options: [null, 0, 30] },
-  { key:'lg_straight',   label:'Lg. Straight',   desc:'40 pts',            options: [null, 0, 40] },
-  { key:'yahtzee',       label:'YAHTZEE!',       desc:'50 pts',            options: [null, 0, 50] },
-  { key:'chance',        label:'Chance',         desc:'Sum of all dice',   manual: true },
-  { key:'yahtzee_bonus', label:'Yahtzee Bonus',  desc:'100 pts each',      options: [null, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+  { key:'three_kind',    label:'3 of a Kind',   desc:'Sum of all dice',  manual: true },
+  { key:'four_kind',     label:'4 of a Kind',   desc:'Sum of all dice',  manual: true },
+  { key:'full_house',    label:'Full House',    desc:'25 pts',           options: [null,0,25] },
+  { key:'sm_straight',   label:'Sm. Straight',  desc:'30 pts',           options: [null,0,30] },
+  { key:'lg_straight',   label:'Lg. Straight',  desc:'40 pts',           options: [null,0,40] },
+  { key:'yahtzee',       label:'YAHTZEE!',      desc:'50 pts',           options: [null,0,50] },
+  { key:'chance',        label:'Chance',        desc:'Sum of all dice',  manual: true },
+  { key:'yahtzee_bonus', label:'Yahtzee Bonus', desc:'100 pts each',     options: [null,0,100,200,300,400,500,600,700,800,900] },
 ];
 
 let players = [];
-let scores = {};
+let scores  = {};
+let gameAlreadySaved = false;
 
-// ---- SETUP ----
+/* ════════════════════════════════════════════
+   TABS
+════════════════════════════════════════════ */
+function showTab(tab) {
+  document.getElementById('score-tab').style.display  = tab === 'score' ? 'block' : 'none';
+  document.getElementById('hof-screen').style.display = tab === 'hof'   ? 'block' : 'none';
+  document.getElementById('tab-score').classList.toggle('active', tab === 'score');
+  document.getElementById('tab-hof').classList.toggle('active',   tab === 'hof');
+  if (tab === 'hof') renderHof();
+}
+
+/* ════════════════════════════════════════════
+   SETUP
+════════════════════════════════════════════ */
 function initSetup() {
   const container = document.getElementById('player-inputs');
   container.innerHTML = '';
@@ -521,7 +412,6 @@ function removePlayerInput(btn) {
   const rows = document.querySelectorAll('.player-input-row');
   if (rows.length <= 1) return;
   btn.closest('.player-input-row').remove();
-  // Recolor dots
   document.querySelectorAll('.player-color-dot').forEach((dot, i) => {
     dot.style.background = PLAYER_COLORS[i];
   });
@@ -536,19 +426,22 @@ function startGame() {
   });
   if (players.length < 1) return;
 
-  // Init scores
   scores = {};
   players.forEach(p => {
     scores[p.name] = {};
     [...UPPER_CATS, ...LOWER_CATS].forEach(c => scores[p.name][c.key] = null);
   });
 
+  gameAlreadySaved = false;
   document.getElementById('setup-screen').style.display = 'none';
-  document.getElementById('game-screen').style.display = 'block';
+  document.getElementById('game-screen').style.display  = 'block';
+  showTab('score');
   buildTable();
 }
 
-// ---- TABLE ----
+/* ════════════════════════════════════════════
+   TABLE
+════════════════════════════════════════════ */
 function buildTable() {
   buildHeader();
   buildBody();
@@ -574,42 +467,29 @@ function buildBody() {
   const tbody = document.getElementById('score-body');
   tbody.innerHTML = '';
 
-  // UPPER SECTION
-  const upperHead = document.createElement('tr');
-  upperHead.className = 'section-row';
-  upperHead.innerHTML = `<td colspan="${players.length+1}">UPPER SECTION</td>`;
-  tbody.appendChild(upperHead);
-
+  appendSectionHead(tbody, 'UPPER SECTION');
   UPPER_CATS.forEach(cat => {
-    const tr = document.createElement('tr');
-    tr.className = 'score-row upper';
-    tr.innerHTML = `<td class="row-label">${cat.label}<span class="row-desc">${cat.desc}</span></td>`;
+    const tr = makeRow('upper', cat.label, cat.desc);
     players.forEach(p => {
       const td = document.createElement('td');
       td.className = 'score-cell';
-      const sel = buildSelect(cat.options, p.name, cat.key);
-      td.appendChild(sel);
+      td.appendChild(buildSelect(cat.options, p.name, cat.key));
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
   });
 
-  // Upper subtotal + bonus
-  const subRow = document.createElement('tr');
-  subRow.className = 'subtotal-row';
-  subRow.innerHTML = `<td class="row-label">Upper Subtotal<span class="row-desc">Bonus at 63+</span></td>`;
+  const subRow = makeStatRow('Upper Subtotal', 'Bonus at 63+');
   players.forEach(p => {
     const td = document.createElement('td');
     td.className = 'val';
     td.id = `upper-sub-${sanitize(p.name)}`;
-    td.innerHTML = '0';
+    td.textContent = '0';
     subRow.appendChild(td);
   });
   tbody.appendChild(subRow);
 
-  const bonusRow = document.createElement('tr');
-  bonusRow.className = 'subtotal-row';
-  bonusRow.innerHTML = `<td class="row-label">Bonus (+35)<span class="row-desc">Need 63 pts</span></td>`;
+  const bonusRow = makeStatRow('Bonus (+35)', 'Need 63 pts');
   players.forEach(p => {
     const td = document.createElement('td');
     td.className = 'val';
@@ -619,71 +499,89 @@ function buildBody() {
   });
   tbody.appendChild(bonusRow);
 
-  // LOWER SECTION
-  const lowerHead = document.createElement('tr');
-  lowerHead.className = 'section-row';
-  lowerHead.innerHTML = `<td colspan="${players.length+1}">LOWER SECTION</td>`;
-  tbody.appendChild(lowerHead);
-
+  appendSectionHead(tbody, 'LOWER SECTION');
   LOWER_CATS.forEach(cat => {
-    const tr = document.createElement('tr');
-    tr.className = 'score-row lower';
-    tr.innerHTML = `<td class="row-label">${cat.label}<span class="row-desc">${cat.desc}</span></td>`;
+    const tr = makeRow('lower', cat.label, cat.desc);
     players.forEach(p => {
       const td = document.createElement('td');
       td.className = 'score-cell';
-      const el = cat.manual ? buildInput(p.name, cat.key) : buildSelect(cat.options, p.name, cat.key);
-      td.appendChild(el);
+      td.appendChild(cat.manual
+        ? buildInput(p.name, cat.key)
+        : buildSelect(cat.options, p.name, cat.key));
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
   });
 
-  // GRAND TOTAL
   const totalRow = document.createElement('tr');
   totalRow.className = 'total-row';
-  totalRow.innerHTML = `<td class="row-label" style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--accent)">GRAND TOTAL</td>`;
+  const labelTd = document.createElement('td');
+  labelTd.className = 'row-label';
+  labelTd.style.cssText = "font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--accent)";
+  labelTd.textContent = 'GRAND TOTAL';
+  totalRow.appendChild(labelTd);
   players.forEach(p => {
     const td = document.createElement('td');
     td.className = 'val';
     td.id = `grand-total-${sanitize(p.name)}`;
-    td.innerHTML = '0';
+    td.textContent = '0';
     totalRow.appendChild(td);
   });
   tbody.appendChild(totalRow);
 }
 
+function appendSectionHead(tbody, label) {
+  const tr = document.createElement('tr');
+  tr.className = 'section-row';
+  tr.innerHTML = `<td colspan="${players.length + 1}">${label}</td>`;
+  tbody.appendChild(tr);
+}
+function makeRow(section, label, desc) {
+  const tr = document.createElement('tr');
+  tr.className = `score-row ${section}`;
+  const td = document.createElement('td');
+  td.className = 'row-label';
+  td.innerHTML = `${label}<span class="row-desc">${desc}</span>`;
+  tr.appendChild(td);
+  return tr;
+}
+function makeStatRow(label, desc) {
+  const tr = document.createElement('tr');
+  tr.className = 'subtotal-row';
+  const td = document.createElement('td');
+  td.className = 'row-label';
+  td.innerHTML = `${label}<span class="row-desc">${desc}</span>`;
+  tr.appendChild(td);
+  return tr;
+}
+
+/* ════════════════════════════════════════════
+   INPUTS
+════════════════════════════════════════════ */
+function buildSelect(options, playerName, key) {
+  const sel = document.createElement('select');
+  sel.id = `score-${sanitize(playerName)}-${key}`;
+  options.forEach(val => {
+    const opt = document.createElement('option');
+    opt.value = val === null ? '' : val;
+    opt.textContent = val === null ? '—' : val;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => saveScore(playerName, key, sel));
+  return sel;
+}
+
 function buildInput(playerName, key) {
   const inp = document.createElement('input');
-  inp.type = 'number';
-  inp.min = 0;
-  inp.max = 30;
-  inp.placeholder = '—';
+  inp.type = 'number'; inp.min = 0; inp.max = 30; inp.placeholder = '—';
   inp.id = `score-${sanitize(playerName)}-${key}`;
   inp.addEventListener('change', () => saveScore(playerName, key, inp));
   return inp;
 }
 
-function buildSelect(options, playerName, key) {
-  const sel = document.createElement('select');
-  sel.id = `score-${sanitize(playerName)}-${key}`;
-
-  options.forEach(val => {
-    const opt = document.createElement('option');
-    if (val === null) {
-      opt.value = '';
-      opt.textContent = '—';
-    } else {
-      opt.value = val;
-      opt.textContent = val;
-    }
-    sel.appendChild(opt);
-  });
-
-  sel.addEventListener('change', () => saveScore(playerName, key, sel));
-  return sel;
-}
-
+/* ════════════════════════════════════════════
+   SCORING
+════════════════════════════════════════════ */
 function saveScore(playerName, key, el) {
   const val = el.value;
   if (val === '' || val === null || isNaN(parseInt(val))) {
@@ -698,86 +596,225 @@ function saveScore(playerName, key, el) {
   updateTotals();
 }
 
+function getGrandTotal(playerName) {
+  let upper = 0;
+  UPPER_CATS.forEach(c => { if (scores[playerName][c.key] !== null) upper += scores[playerName][c.key]; });
+  const bonus = upper >= 63 ? 35 : 0;
+  let lower = 0;
+  LOWER_CATS.forEach(c => { if (scores[playerName][c.key] !== null) lower += scores[playerName][c.key]; });
+  return { upper, bonus, lower, grand: upper + bonus + lower };
+}
+
 function updateTotals() {
   players.forEach(p => {
     const sn = sanitize(p.name);
-    let upperSum = 0;
-    UPPER_CATS.forEach(c => { if (scores[p.name][c.key] !== null) upperSum += scores[p.name][c.key]; });
-    const bonus = upperSum >= 63 ? 35 : 0;
-
-    let lowerSum = 0;
-    LOWER_CATS.forEach(c => { if (scores[p.name][c.key] !== null) lowerSum += scores[p.name][c.key]; });
-
-    const grand = upperSum + bonus + lowerSum;
+    const { upper, bonus, grand } = getGrandTotal(p.name);
 
     const subEl = document.getElementById(`upper-sub-${sn}`);
-    if (subEl) subEl.textContent = upperSum;
+    if (subEl) subEl.textContent = upper;
 
     const bonusEl = document.getElementById(`bonus-${sn}`);
     if (bonusEl) {
-      if (bonus === 35) {
-        bonusEl.innerHTML = '<span class="bonus-achieved">+35 ✓</span>';
-      } else {
-        const needed = 63 - upperSum;
-        bonusEl.innerHTML = `<span class="bonus-pending">${upperSum >= 63 ? '+35' : `need ${needed}`}</span>`;
-      }
+      bonusEl.innerHTML = bonus === 35
+        ? '<span class="bonus-achieved">+35 ✓</span>'
+        : `<span class="bonus-pending">${upper >= 63 ? '+35' : 'need ' + (63 - upper)}</span>`;
     }
 
     const gtEl = document.getElementById(`grand-total-${sn}`);
     if (gtEl) gtEl.textContent = grand;
 
-    const totalDisplay = document.getElementById(`total-display-${sn}`);
-    if (totalDisplay) totalDisplay.textContent = `${grand} pts`;
+    const disp = document.getElementById(`total-display-${sn}`);
+    if (disp) disp.textContent = `${grand} pts`;
   });
 
   checkWinner();
 }
 
 function checkWinner() {
-  // All cells filled?
   const allKeys = [...UPPER_CATS, ...LOWER_CATS].map(c => c.key);
   const allFilled = players.every(p => allKeys.every(k => scores[p.name][k] !== null));
   const banner = document.getElementById('winner-banner');
   if (!allFilled) { banner.style.display = 'none'; return; }
 
-  let best = -1;
-  let winners = [];
-  players.forEach(p => {
-    const sn = sanitize(p.name);
-    const val = parseInt(document.getElementById(`grand-total-${sn}`).textContent) || 0;
-    if (val > best) { best = val; winners = [p.name]; }
-    else if (val === best) { winners.push(p.name); }
-  });
+  const totals = players.map(p => ({ name: p.name, grand: getGrandTotal(p.name).grand }));
+  const best   = Math.max(...totals.map(t => t.grand));
+  const winners = totals.filter(t => t.grand === best).map(t => t.name);
+
   banner.style.display = 'block';
-  if (winners.length === 1) {
-    banner.textContent = `🎲 ${winners[0]} WINS WITH ${best} PTS! 🎲`;
-  } else {
-    banner.textContent = `🎲 TIE! ${winners.join(' & ')} — ${best} PTS EACH!`;
+  banner.textContent = winners.length === 1
+    ? `🎲 ${winners[0]} WINS WITH ${best} PTS! 🎲`
+    : `🎲 TIE! ${winners.join(' & ')} — ${best} PTS EACH!`;
+
+  if (!gameAlreadySaved) {
+    gameAlreadySaved = true;
+    saveGameToDb(totals, winners);
   }
 }
 
-function sanitize(name) {
-  return name.replace(/[^a-zA-Z0-9]/g, '_');
+/* ════════════════════════════════════════════
+   SUPABASE — SAVE GAME
+════════════════════════════════════════════ */
+async function saveGameToDb(totals, winners) {
+  try {
+    for (const { name, grand } of totals) {
+      const won    = winners.includes(name);
+      const player = players.find(p => p.name === name);
+
+      // Upsert player row (insert or update stats)
+      const existing = await sb(`players?name=eq.${encodeURIComponent(name)}&select=wins,games,total_points`);
+
+      if (existing && existing.length > 0) {
+        const cur = existing[0];
+        await sb(`players?name=eq.${encodeURIComponent(name)}`, {
+          method: 'PATCH',
+          prefer: 'return=minimal',
+          body: {
+            wins:         cur.wins + (won ? 1 : 0),
+            games:        cur.games + 1,
+            total_points: cur.total_points + grand,
+            color:        player?.color || '#f5c842'
+          }
+        });
+      } else {
+        await sb('players', {
+          method: 'POST',
+          prefer: 'return=minimal',
+          body: {
+            name,
+            color:        player?.color || '#f5c842',
+            wins:         won ? 1 : 0,
+            games:        1,
+            total_points: grand
+          }
+        });
+      }
+
+      // Insert game history row
+      await sb('game_history', {
+        method: 'POST',
+        prefer: 'return=minimal',
+        body: { player_name: name, score: grand, won }
+      });
+    }
+  } catch (e) {
+    console.error('Failed to save game to database:', e);
+  }
 }
 
-// ---- MODAL ----
-function confirmReset() {
-  document.getElementById('confirm-modal').classList.add('active');
+/* ════════════════════════════════════════════
+   SUPABASE — RENDER HOF
+════════════════════════════════════════════ */
+async function renderHof() {
+  const container = document.getElementById('hof-content');
+  container.innerHTML = '<div class="hof-loading">LOADING...</div>';
+
+  try {
+    const players_data = await sb('players?select=name,color,wins,games,total_points&order=wins.desc,total_points.desc');
+    const history_data = await sb('game_history?select=player_name,score,won,played_at&order=played_at.desc&limit=200');
+
+    if (!players_data || players_data.length === 0) {
+      container.innerHTML = '<div class="hof-empty">No games recorded yet.<br>Finish a game to see stats here.</div>';
+      return;
+    }
+
+    // Group history by player
+    const historyMap = {};
+    history_data.forEach(h => {
+      if (!historyMap[h.player_name]) historyMap[h.player_name] = [];
+      historyMap[h.player_name].push(h);
+    });
+
+    container.innerHTML = '';
+    players_data.forEach((p, idx) => {
+      const rankClass = idx === 0 ? 'gold' : idx === 1 ? 'silver' : idx === 2 ? 'bronze' : '';
+      const rankLabel = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx+1}`;
+      const avg  = p.games > 0 ? Math.round(p.total_points / p.games) : 0;
+      const hist = historyMap[p.name] || [];
+      const best = hist.length > 0 ? Math.max(...hist.map(h => h.score)) : 0;
+
+      const card = document.createElement('div');
+      card.className = 'hof-player-card';
+      card.innerHTML = `
+        <div class="hof-card-header">
+          <div class="hof-rank ${rankClass}">${rankLabel}</div>
+          <div class="hof-color-dot" style="background:${p.color}"></div>
+          <div class="hof-player-name">${p.name}</div>
+        </div>
+        <div class="hof-stats">
+          <div class="hof-stat">
+            <span class="hof-stat-val accent">${p.wins}</span>
+            <span class="hof-stat-label">WINS</span>
+          </div>
+          <div class="hof-stat">
+            <span class="hof-stat-val">${p.games}</span>
+            <span class="hof-stat-label">GAMES</span>
+          </div>
+          <div class="hof-stat">
+            <span class="hof-stat-val">${avg}</span>
+            <span class="hof-stat-label">AVG PTS</span>
+          </div>
+          <div class="hof-stat">
+            <span class="hof-stat-val">${best}</span>
+            <span class="hof-stat-label">BEST</span>
+          </div>
+        </div>
+        <button class="hof-history-toggle" onclick="toggleHistory(this)">▸ Game History (${hist.length})</button>
+        <div class="hof-history">
+          ${hist.slice(0, 20).map(h => {
+            const date = new Date(h.played_at).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+            return `
+              <div class="hof-game-row">
+                <span class="hof-game-date">${date}</span>
+                <span class="hof-game-score">${h.score} pts</span>
+                <span class="${h.won ? 'hof-game-won' : 'hof-game-lost'}">${h.won ? '🏆 WIN' : 'played'}</span>
+              </div>`;
+          }).join('')}
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+  } catch (e) {
+    container.innerHTML = `<div class="hof-error">Could not load Hall of Fame.<br><small>${e.message}</small></div>`;
+  }
 }
 
-function closeModal() {
-  document.getElementById('confirm-modal').classList.remove('active');
+function toggleHistory(btn) {
+  const hist = btn.nextElementSibling;
+  const open = hist.classList.toggle('open');
+  btn.textContent = (open ? '▾' : '▸') + btn.textContent.slice(1);
 }
 
+/* ════════════════════════════════════════════
+   MODALS
+════════════════════════════════════════════ */
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+function confirmReset() { document.getElementById('confirm-modal').classList.add('active'); }
 function resetGame() {
-  closeModal();
-  document.getElementById('game-screen').style.display = 'none';
+  closeModal('confirm-modal');
+  document.getElementById('game-screen').style.display  = 'none';
   document.getElementById('setup-screen').style.display = 'block';
   document.getElementById('winner-banner').style.display = 'none';
   initSetup();
 }
+function confirmClearHof() { document.getElementById('clear-hof-modal').classList.add('active'); }
+async function clearHof() {
+  try {
+    await sb('game_history?id=neq.00000000-0000-0000-0000-000000000000', { method: 'DELETE', prefer: 'return=minimal' });
+    await sb('players?id=neq.00000000-0000-0000-0000-000000000000',      { method: 'DELETE', prefer: 'return=minimal' });
+  } catch(e) { console.error('Clear failed:', e); }
+  closeModal('clear-hof-modal');
+  renderHof();
+}
 
-// ---- INIT ----
+/* ════════════════════════════════════════════
+   UTILS
+════════════════════════════════════════════ */
+function sanitize(name) { return name.replace(/[^a-zA-Z0-9]/g, '_'); }
+
+/* ════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════ */
 initSetup();
 </script>
 </body>
