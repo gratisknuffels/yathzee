@@ -220,6 +220,40 @@
   .hof-game-lost { color: var(--muted); font-size: 0.65rem; flex-shrink: 0; }
   .hof-actions { display: flex; justify-content: flex-end; margin-top: 20px; }
 
+
+  /* ── CHARACTER PICKER ── */
+  #char-modal .modal { max-width: 420px; text-align: left; }
+  #char-modal h3 { text-align: center; margin-bottom: 4px; }
+  #char-modal .char-subtitle { text-align: center; color: var(--muted); font-size: 0.7rem; margin-bottom: 16px; letter-spacing: 1px; }
+
+  .char-player-row {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface2); border: 1.5px solid var(--border);
+    border-radius: 6px; padding: 10px 12px; margin-bottom: 8px;
+  }
+  .char-player-label {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+    letter-spacing: 1px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .char-display {
+    font-size: 1.6rem; width: 44px; text-align: center; flex-shrink: 0;
+  }
+  .char-reroll-btn {
+    background: none; border: 1.5px solid var(--border); border-radius: 4px;
+    color: var(--muted); font-size: 0.7rem; padding: 4px 8px; cursor: pointer;
+    font-family: 'DM Mono', monospace; transition: all 0.15s; white-space: nowrap;
+  }
+  .char-reroll-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .char-modal-btns { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
+
+  .char-open-btn {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 500;
+    padding: 6px 12px; border-radius: 4px; border: 1.5px solid var(--border);
+    background: transparent; color: var(--text); cursor: pointer;
+    letter-spacing: 0.5px; transition: all 0.15s; white-space: nowrap;
+  }
+  .char-open-btn:hover { border-color: var(--accent); color: var(--accent); }
   /* ── MODAL ── */
   .modal-overlay {
     display: none; position: fixed; inset: 0;
@@ -248,6 +282,7 @@
   <div id="player-inputs"></div>
   <div class="setup-actions">
     <button class="btn" onclick="addPlayerInput()">+ Add Player</button>
+    <button class="btn" onclick="openCharPicker()">🎲 Random Characters</button>
     <button class="btn primary" onclick="startGame()">Start Game ▶</button>
   </div>
 </div>
@@ -311,6 +346,19 @@
   </div>
 </div>
 
+<!-- CHARACTER PICKER MODAL -->
+<div class="modal-overlay" id="char-modal">
+  <div class="modal">
+    <h3>Random Characters</h3>
+    <p class="char-subtitle">ROLL A CHARACTER FOR EACH PLAYER</p>
+    <div id="char-rows"></div>
+    <div class="char-modal-btns">
+      <button class="btn" onclick="closeModal('char-modal')">Close</button>
+      <button class="btn primary" onclick="rerollAll()">🎲 Reroll All</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ════════════════════════════════════════════
    SUPABASE CONFIG
@@ -336,6 +384,102 @@ async function sb(path, options = {}) {
   }
   const text = await res.text();
   return text ? JSON.parse(text) : null;
+}
+
+
+/* ════════════════════════════════════════════
+   CHARACTER PICKER
+════════════════════════════════════════════ */
+const CHARACTERS = [
+  { emoji: '🧙', name: 'Wizard' },
+  { emoji: '🐉', name: 'Dragon' },
+  { emoji: '🦁', name: 'Lion' },
+  { emoji: '🐺', name: 'Wolf' },
+  { emoji: '🦊', name: 'Fox' },
+  { emoji: '🐯', name: 'Tiger' },
+  { emoji: '🦅', name: 'Eagle' },
+  { emoji: '🐻', name: 'Bear' },
+  { emoji: '🦈', name: 'Shark' },
+  { emoji: '🦄', name: 'Unicorn' },
+  { emoji: '🐲', name: 'Wyrm' },
+  { emoji: '🧟', name: 'Zombie' },
+  { emoji: '🧛', name: 'Vampire' },
+  { emoji: '🤠', name: 'Cowboy' },
+  { emoji: '👽', name: 'Alien' },
+  { emoji: '🤖', name: 'Robot' },
+  { emoji: '🎩', name: 'Magician' },
+  { emoji: '🦸', name: 'Hero' },
+  { emoji: '🦹', name: 'Villain' },
+  { emoji: '🧝', name: 'Elf' },
+  { emoji: '🧞', name: 'Genie' },
+  { emoji: '🐸', name: 'Frog' },
+  { emoji: '🦋', name: 'Butterfly' },
+  { emoji: '🐙', name: 'Octopus' },
+];
+
+let assignedChars = {};
+
+function randomChar(exclude = []) {
+  const pool = CHARACTERS.filter(c => !exclude.includes(c.name));
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function openCharPicker() {
+  const inputs = document.querySelectorAll('#player-inputs input[type="text"]');
+  if (inputs.length === 0) return;
+
+  assignedChars = {};
+  const used = [];
+  inputs.forEach((inp, i) => {
+    const name = inp.value.trim() || `Player ${i+1}`;
+    const char = randomChar(used);
+    used.push(char.name);
+    assignedChars[i] = char;
+  });
+
+  renderCharRows();
+  document.getElementById('char-modal').classList.add('active');
+}
+
+function renderCharRows() {
+  const inputs = document.querySelectorAll('#player-inputs input[type="text"]');
+  const container = document.getElementById('char-rows');
+  container.innerHTML = '';
+
+  inputs.forEach((inp, i) => {
+    const name = inp.value.trim() || `Player ${i+1}`;
+    const char = assignedChars[i] || CHARACTERS[0];
+    const color = PLAYER_COLORS[i];
+
+    const row = document.createElement('div');
+    row.className = 'char-player-row';
+    row.innerHTML = `
+      <div class="char-display">${char.emoji}</div>
+      <div class="char-player-label" style="color:${color}">${name}</div>
+      <div style="font-size:0.7rem;color:var(--muted);flex-shrink:0">${char.name}</div>
+      <button class="char-reroll-btn" onclick="rerollOne(${i})">↺ Reroll</button>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function rerollOne(idx) {
+  const used = Object.entries(assignedChars)
+    .filter(([k]) => parseInt(k) !== idx)
+    .map(([, v]) => v.name);
+  assignedChars[idx] = randomChar(used);
+  renderCharRows();
+}
+
+function rerollAll() {
+  const inputs = document.querySelectorAll('#player-inputs input[type="text"]');
+  const used = [];
+  inputs.forEach((inp, i) => {
+    const char = randomChar(used);
+    used.push(char.name);
+    assignedChars[i] = char;
+  });
+  renderCharRows();
 }
 
 /* ════════════════════════════════════════════
@@ -670,26 +814,32 @@ async function saveGameToDb(totals, winners) {
 
       if (existing && existing.length > 0) {
         const cur = existing[0];
+        const char = assignedChars[players.findIndex(p => p.name === name)];
         await sb(`players?name=eq.${encodeURIComponent(name)}`, {
           method: 'PATCH',
           prefer: 'return=minimal',
           body: {
-            wins:         cur.wins + (won ? 1 : 0),
-            games:        cur.games + 1,
-            total_points: cur.total_points + grand,
-            color:        player?.color || '#f5c842'
+            wins:            cur.wins + (won ? 1 : 0),
+            games:           cur.games + 1,
+            total_points:    cur.total_points + grand,
+            color:           player?.color || '#f5c842',
+            character_emoji: char ? char.emoji : '',
+            character_name:  char ? char.name  : ''
           }
         });
       } else {
+        const char = assignedChars[players.findIndex(p => p.name === name)];
         await sb('players', {
           method: 'POST',
           prefer: 'return=minimal',
           body: {
             name,
-            color:        player?.color || '#f5c842',
-            wins:         won ? 1 : 0,
-            games:        1,
-            total_points: grand
+            color:           player?.color || '#f5c842',
+            wins:            won ? 1 : 0,
+            games:           1,
+            total_points:    grand,
+            character_emoji: char ? char.emoji : '',
+            character_name:  char ? char.name  : ''
           }
         });
       }
@@ -714,7 +864,7 @@ async function renderHof() {
   container.innerHTML = '<div class="hof-loading">LOADING...</div>';
 
   try {
-    const players_data = await sb('players?select=name,color,wins,games,total_points&order=wins.desc,total_points.desc');
+    const players_data = await sb('players?select=name,color,wins,games,total_points,character_emoji,character_name&order=wins.desc,total_points.desc');
     const history_data = await sb('game_history?select=player_name,score,won,played_at&order=played_at.desc&limit=200');
 
     if (!players_data || players_data.length === 0) {
@@ -744,6 +894,7 @@ async function renderHof() {
           <div class="hof-rank ${rankClass}">${rankLabel}</div>
           <div class="hof-color-dot" style="background:${p.color}"></div>
           <div class="hof-player-name">${p.name}</div>
+          ${p.character_emoji ? `<div style="font-size:1.4rem" title="${p.character_name}">${p.character_emoji}</div>` : ''}
         </div>
         <div class="hof-stats">
           <div class="hof-stat">
