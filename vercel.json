@@ -4,6 +4,6 @@
     { "src": "*.html", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/", "dest": "/yahtzee_scoreboard.html" }
+    { "src": "/", "dest": "/index.html" }
   ]
 }
